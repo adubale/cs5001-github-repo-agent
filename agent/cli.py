@@ -1,5 +1,6 @@
 import typer
 from agent.tools.git_tools import GitTools
+from agent.agents.reviewer import ReviewerAgent
 
 app = typer.Typer(help="Personalized GitHub Repo Agent")
 
@@ -14,9 +15,27 @@ def review(
         raise typer.Exit(code=1)
 
     git_tools = GitTools()
+    reviewer = ReviewerAgent()
 
     diff_text = git_tools.get_diff(base, range_)
     changed_files = git_tools.get_changed_files(base, range_)
+
+    review_result = reviewer.review(diff_text, changed_files)
+
+    typer.echo("[Reviewer] Analysis Complete")
+
+    typer.echo(f"Category: {review_result.category}")
+    typer.echo(f"Risk: {review_result.risk}")
+
+    if review_result.findings:
+        typer.echo("Findings:")
+        for f in review_result.findings:
+            typer.echo(f"- {f}")
+
+    typer.echo("Evidence:")
+    for e in review_result.evidence:
+        typer.echo(f"- {e}")
+
 
     typer.echo("\nChanged files:")
     if changed_files:
@@ -24,7 +43,6 @@ def review(
             typer.echo(f"- {path}")
     else:
         typer.echo("[No changed files found]")
-
     typer.echo("\nDiff Preview:")
     typer.echo(diff_text if diff_text else "[No diff found]")
 

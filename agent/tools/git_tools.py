@@ -9,7 +9,7 @@ class GitTools:
     @staticmethod
     def _build_diff_target(base: str | None = None, commit_range: str | None = None) -> str:
         if base:
-            return f"{base}...HEAD"
+            return f"{base}"
         return commit_range
 
     def get_diff(self, base, commit_range) -> str:

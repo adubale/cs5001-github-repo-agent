@@ -44,14 +44,14 @@ def review(
     typer.echo(f"Justification: {plan.justification}")
 
 
-    typer.echo("\nChanged files:")
-    if changed_files:
-        for path in changed_files:
-            typer.echo(f"- {path}")
-    else:
-        typer.echo("[No changed files found]")
-    typer.echo("\nDiff Preview:")
-    typer.echo(diff_text if diff_text else "[No diff found]")
+#    typer.echo("\nChanged files:")
+#    if changed_files:
+#        for path in changed_files:
+#            typer.echo(f"- {path}")
+#    else:
+#        typer.echo("[No changed files found]")
+#    typer.echo("\nDiff Preview:")
+#    typer.echo(diff_text if diff_text else "[No diff found]")
 
 @app.command()
 def hello():

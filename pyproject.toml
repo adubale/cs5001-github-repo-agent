@@ -1,0 +1,10 @@
+[project]
+name = "repo-agent"
+version = "0.0.0"
+description = "Personalized GitHub Repo Agent"
+dependencies = [
+    "typer"
+]
+
+[project.scripts]
+agent = "agent.cli:app"

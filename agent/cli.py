@@ -1,6 +1,7 @@
 import typer
 from agent.tools.git_tools import GitTools
 from agent.agents.reviewer import ReviewerAgent
+from agent.agents.planner import PlannerAgent
 
 app = typer.Typer(help="Personalized GitHub Repo Agent")
 
@@ -16,11 +17,13 @@ def review(
 
     git_tools = GitTools()
     reviewer = ReviewerAgent()
+    planner = PlannerAgent()
 
     diff_text = git_tools.get_diff(base, range_)
     changed_files = git_tools.get_changed_files(base, range_)
 
     review_result = reviewer.review(diff_text, changed_files)
+    plan = planner.plan(review_result)
 
     typer.echo("[Reviewer] Analysis Complete")
 
@@ -35,6 +38,10 @@ def review(
     typer.echo("Evidence:")
     for e in review_result.evidence:
         typer.echo(f"- {e}")
+
+    typer.echo("\n[Planner] Plan Complete")
+    typer.echo(f"Decision: {plan.decision}")
+    typer.echo(f"Justification: {plan.justification}")
 
 
     typer.echo("\nChanged files:")

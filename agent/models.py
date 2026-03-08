@@ -21,4 +21,3 @@ class DraftResult:
 class ReflectionResult:
     verdict: str
     notes: list[str] = field(default_factory=list)
-

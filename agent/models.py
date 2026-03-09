@@ -37,6 +37,10 @@ class DraftArtifact:
     plan_result: Optional[PlanResult] = None
     reflection_result: Optional[ReflectionResult] = None
 
+    github_number: Optional[int] = None
+    github_url: Optional[str] = None
+    github_error: Optional[str] = None
+
     def to_dict(self) -> dict:
         return asdict(self)
 
@@ -64,6 +68,9 @@ class DraftArtifact:
             review_result=review_result,
             plan_result=plan_result,
             reflection_result=reflection_result,
+            github_number=data.get("github_number"),
+            github_url=data.get("github_url"),
+            github_error=data.get("github_error"),
         )
 
 @dataclass

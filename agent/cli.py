@@ -3,6 +3,7 @@ from agent.tools.git_tools import GitTools
 from agent.agents.reviewer import ReviewerAgent
 from agent.agents.planner import PlannerAgent
 from agent.agents.writer import WriterAgent
+from agent.agents.critic import CriticAgent
 
 app = typer.Typer(help="Personalized GitHub Repo Agent")
 
@@ -72,6 +73,7 @@ def draft(
     #    raise typer.Exit(code=1)
 
     writer = WriterAgent()
+    critic = CriticAgent()
 
     if instruction:
         if base or range:
@@ -87,6 +89,14 @@ def draft(
         typer.echo(f"Title: {draft_result.title}")
         typer.echo("Body:")
         typer.echo(draft_result.body)
+
+        reflection = critic.reflect(draft=draft_result)
+        typer.echo("\n[Critic] Reflection Complete")
+        typer.echo(f"Verdict: {reflection.verdict}")
+        if reflection.notes:
+            typer.echo("Notes:")
+            for note in reflection.notes:
+                typer.echo(f"- {note}")
         return
 
     if (not base and not range_) or (base and range_):
@@ -131,6 +141,15 @@ def draft(
     typer.echo(f"Title: {draft_result.title}")
     typer.echo(f"Body:")
     typer.echo(draft_result.body)
+
+    reflection = critic.reflect(draft=draft_result)
+    typer.echo("\n[Critic] Reflection Complete")
+    typer.echo(f"Verdict: {reflection.verdict}")
+    if reflection.notes:
+        typer.echo("Notes:")
+        for note in reflection.notes:
+            typer.echo(f"- {note}")
+
 
 if __name__ == "__main__":
     app()

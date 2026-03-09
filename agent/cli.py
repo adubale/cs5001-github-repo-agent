@@ -66,10 +66,10 @@ def draft(
         range_: str = typer.Option(None, "--range", help="Range to diff for review driven drafting"),
 ):
     target = target.lower().strip()
-
-    if target not in {"issue, pr"}:
-        typer.echo("Target must be either 'issue' or 'pr")
-        raise typer.Exit(code=1)
+    #print(target)
+    #if target not in {"issue, pr"}:
+    #    typer.echo("Target must be either 'issue' or 'pr'")
+    #    raise typer.Exit(code=1)
 
     writer = WriterAgent()
 

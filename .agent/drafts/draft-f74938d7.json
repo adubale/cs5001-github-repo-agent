@@ -1,0 +1,18 @@
+{
+  "id": "draft-f74938d7",
+  "kind": "pr",
+  "source": "instruction",
+  "title": "Refactor duplicated pricing logic into shared helper",
+  "body": "## Summary\nThis PR refactors duplicated pricing logic into a shared helper function to improve code maintainability and reduce redundancy.\n\n## Files Affected\nThe exact files must be confirmed before opening the PR. Typically, this would include files where pricing logic is duplicated, such as:\n- `src/utils/pricing.js` (new file for the shared helper)\n- Any files containing duplicated pricing logic (e.g., `src/modules/billing.js`, `src/modules/invoice.js`)\n\n## Behavior Change\nNo behavioral changes are expected. The refactoring is purely internal and aims to consolidate duplicated logic without altering the existing functionality.\n\n## Test Plan\nThe following should be tested:\n1. Verify that the shared helper function produces the same results as the duplicated logic it replaces.\n2. Ensure all existing tests pass after the refactoring.\n3. Manually test pricing-related features to confirm no regressions.\n\n## Risk Level\nlow",
+  "status": "drafted",
+  "review_result": null,
+  "plan_result": null,
+  "reflection_result": {
+    "verdict": "PASS",
+    "notes": [
+      "Draft follows the instruction and avoids unsupported repository claims.",
+      "All required sections are present and appropriately detailed.",
+      "Risk level is correctly assessed as low for a refactoring PR."
+    ]
+  }
+}

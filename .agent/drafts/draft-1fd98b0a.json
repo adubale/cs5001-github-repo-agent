@@ -1,0 +1,19 @@
+{
+  "id": "draft-1fd98b0a",
+  "kind": "issue",
+  "source": "instruction",
+  "title": "Add validation for empty usernames in login flow",
+  "body": "## Problem Description\nThe login flow currently does not validate empty usernames, which could lead to unexpected behavior or errors when users attempt to log in with an empty username field.\n\n## Evidence\nThis issue is based on the user's instruction and needs repository confirmation to verify the current behavior and any existing validation logic.\n\n## Acceptance Criteria\n- The login flow should reject empty usernames with a clear error message.\n- The error message should be user-friendly and indicate that the username is required.\n- The validation should occur before any API calls or database queries.\n\n## Risk Level\nlow",
+  "status": "drafted",
+  "review_result": null,
+  "plan_result": null,
+  "reflection_result": {
+    "verdict": "PASS",
+    "notes": [
+      "Draft follows the instruction and includes all required sections.",
+      "Avoids making unsupported repository-specific claims.",
+      "Acceptance criteria are clear and actionable.",
+      "Risk level is appropriately assessed as low."
+    ]
+  }
+}

@@ -118,6 +118,13 @@ def draft(
         typer.echo(f"Draft ID: {artifact.id}")
         typer.echo(artifact.title)
         typer.echo(artifact.body)
+
+        typer.echo("\n[Critic] Reflection Complete")
+        typer.echo(f"Verdict: {artifact.reflection_result.verdict}")
+        if artifact.reflection_result.notes:
+            typer.echo("Notes:")
+            for note in artifact.reflection_result.notes:
+                typer.echo(f"- {note}")
         return
 
     if (not base and not range_) or (base and range_):
@@ -159,6 +166,13 @@ def draft(
     typer.echo(f"Draft ID: {artifact.id}")
     typer.echo(artifact.title)
     typer.echo(artifact.body)
+
+    typer.echo("\n[Critic] Reflection Complete")
+    typer.echo(f"Verdict: {artifact.reflection_result.verdict}")
+    if artifact.reflection_result.notes:
+        typer.echo("Notes:")
+        for note in artifact.reflection_result.notes:
+            typer.echo(f"- {note}")
 
 
 @app.command()
@@ -227,6 +241,14 @@ def show_draft(draft_id: str):
     typer.echo(artifact.id)
     typer.echo(artifact.title)
     typer.echo(artifact.body)
+
+    if artifact.reflection_result:
+        typer.echo("\n[Critic] Reflection")
+        typer.echo(f"Verdict: {artifact.reflection_result.verdict}")
+        if artifact.reflection_result.notes:
+            typer.echo("Notes:")
+            for note in artifact.reflection_result.notes:
+                typer.echo(f"- {note}")
 
 
 @app.command()

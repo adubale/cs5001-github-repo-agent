@@ -1,0 +1,21 @@
+{
+  "id": "draft-078c6835",
+  "kind": "issue",
+  "source": "instruction",
+  "title": "Test improver functionality",
+  "body": "## Problem Description\nThe user has requested to test the improver functionality. This issue is created to ensure that the improver functionality is working as expected and to identify any potential issues or improvements.\n\n## Evidence\nThis issue is based on the user's instruction and needs repository confirmation to provide specific evidence or details about the improver functionality.\n\n## Acceptance Criteria\n- The improver functionality is tested and verified to work as expected.\n- Any identified issues or improvements are documented and addressed.\n- The functionality meets the user's requirements and expectations.\n\n## Risk Level\nlow",
+  "status": "created",
+  "review_result": null,
+  "plan_result": null,
+  "reflection_result": {
+    "verdict": "PASS",
+    "notes": [
+      "Draft follows the instruction and avoids unsupported repository claims.",
+      "All required sections are present.",
+      "Risk level is appropriately low given the vague instruction."
+    ]
+  },
+  "github_number": 12,
+  "github_url": "https://github.com/adubale/cs5001-github-repo-agent/issues/12",
+  "github_error": null
+}

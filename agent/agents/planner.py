@@ -42,6 +42,7 @@ Rules:
 - Do not invent evidence.
 - Use "Create Issue" when the review suggests a problem, risk, missing evidence, missing tests, or follow-up work that should be tracked.
 - Use "Create PR" when the review suggests a concrete improvement or change proposal that is actionable and ready to draft.
+- Use "Create PR" if a feature has been added and there are no further issues
 - Use "No action required" when the review indicates no meaningful follow-up is needed.
 - The justification must explicitly reference the review evidence or findings.
 - Return JSON only.

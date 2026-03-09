@@ -90,7 +90,7 @@ def draft(
         typer.echo("Body:")
         typer.echo(draft_result.body)
 
-        reflection = critic.reflect(draft=draft_result)
+        reflection = critic.reflect_from_instruction(draft=draft_result, instruction=instruction, target=target)
         typer.echo("\n[Critic] Reflection Complete")
         typer.echo(f"Verdict: {reflection.verdict}")
         if reflection.notes:
@@ -142,7 +142,7 @@ def draft(
     typer.echo(f"Body:")
     typer.echo(draft_result.body)
 
-    reflection = critic.reflect(draft=draft_result)
+    reflection = critic.reflect_from_review(draft=draft_result, review=review_result, plan=plan)
     typer.echo("\n[Critic] Reflection Complete")
     typer.echo(f"Verdict: {reflection.verdict}")
     if reflection.notes:

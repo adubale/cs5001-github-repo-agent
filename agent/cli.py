@@ -11,6 +11,7 @@ from agent.agents.planner import PlannerAgent
 from agent.agents.writer import WriterAgent
 from agent.agents.critic import CriticAgent
 from agent.agents.gatekeeper import GatekeeperAgent
+from agent.agents.improver import ImproverAgent
 
 from agent.tools.draft_store import DraftStore
 from agent.tools.review_store import ReviewStore
@@ -89,7 +90,6 @@ def draft(
     store = DraftStore()
 
     if instruction:
-
         if target == "issue":
             draft_result = writer.draft_issue_from_instruction(instruction)
         else:
@@ -159,6 +159,50 @@ def draft(
     typer.echo(f"Draft ID: {artifact.id}")
     typer.echo(artifact.title)
     typer.echo(artifact.body)
+
+
+@app.command()
+def improve(
+    target: str = typer.Argument(...),
+    number: int = typer.Option(..., "--number"),
+    repo: str = typer.Option(None, "--repo"),
+):
+    target = target.lower().strip()
+
+    if target not in {"issue", "pr"}:
+        typer.echo("Target must be either 'issue' or 'pr'")
+        raise typer.Exit(code=1)
+
+    github_tools = GitHubTools(repo=repo)
+    improver = ImproverAgent()
+
+    if target == "issue":
+        artifact = github_tools.get_issue(number)
+        result = improver.improve_issue(
+            title=artifact.get("title", ""),
+            body=artifact.get("body", ""),
+        )
+    else:
+        artifact = github_tools.get_pr(number)
+        result = improver.improve_pr(
+            title=artifact.get("title", ""),
+            body=artifact.get("body", ""),
+        )
+
+    typer.echo("[Reviewer] Critique")
+    for item in result["critique"]:
+        typer.echo(f"- {item}")
+
+    typer.echo("\n[Reviewer] Suggested Acceptance Criteria")
+    if result["suggested_acceptance_criteria"]:
+        for item in result["suggested_acceptance_criteria"]:
+            typer.echo(f"- {item}")
+    else:
+        typer.echo("- None provided")
+
+    typer.echo("\n[Writer] Proposed Improved Version")
+    typer.echo(result["improved_title"])
+    typer.echo(result["improved_body"])
 
 
 @app.command()
